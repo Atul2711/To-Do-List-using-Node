@@ -171,6 +171,8 @@ app.get('/:customListName',function(req,res){
                 //exisiting
                 res.render('list',{ListTitle:foundlist.name,Ctask:foundlist.items,Year:year});
             }
+        }else{
+            console.log(err);
         }
     })
 
