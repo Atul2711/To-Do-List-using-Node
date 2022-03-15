@@ -2,7 +2,7 @@ const express=require('express');
 const bodyparser=require('body-parser');
 const mongoose=require('mongoose');
 
-
+require('dotenv').config();
 
 const app=express();
 
@@ -15,7 +15,7 @@ app.use(bodyparser.urlencoded({extended:true}));
 // let Tasks=["Buy Food","Cook Food","Eat Food"];
 // let workList=[];
 
-mongoose.connect("mongodb://localhost:27017/todolistDB",{useNewUrlParser:true});
+mongoose.connect(process.env.MONGO_URL,{useNewUrlParser:true});
 
 //Schema 
 const itemsSchema=new mongoose.Schema({
@@ -179,6 +179,6 @@ app.get('/:customListName',function(req,res){
 
 
 
-app.listen(3000,function(){
+app.listen(process.env.PORT || 3000,function(){
     console.log("Server is running on port 3000");
 });
