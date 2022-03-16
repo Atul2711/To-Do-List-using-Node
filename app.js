@@ -16,7 +16,7 @@ app.use(bodyparser.urlencoded({extended:true}));
 // let Tasks=["Buy Food","Cook Food","Eat Food"];
 // let workList=[];
 
-mongoose.connect("mongodb+srv://Pandit:pandit@cluster0.n7or2.mongodb.net/todoListDB",{useNewUrlParser:true});
+mongoose.connect(process.env.MONGO,{useNewUrlParser:true});
 // mongodb+srv://Pandit:<password>@cluster0.n7or2.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
 
 //Schema 
