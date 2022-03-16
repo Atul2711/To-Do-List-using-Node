@@ -13,11 +13,9 @@ app.use(express.static("public"));
 app.use(bodyparser.urlencoded({extended:true}));
 
 
-// let Tasks=["Buy Food","Cook Food","Eat Food"];
-// let workList=[];
 
 mongoose.connect("mongodb+srv://Pandit:pandit@cluster0.n7or2.mongodb.net/todoListDB",{useNewUrlParser:true});
-// mongodb+srv://Pandit:<password>@cluster0.n7or2.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
+
 
 //Schema 
 const itemsSchema=new mongoose.Schema({
@@ -43,13 +41,7 @@ const item3=new Item({
 
 const defaultItems=[item1,item2,item3];
 
-// Item.insertMany(defaultItems,function(err){
-//     if(err){
-//         console.log(err);
-//     }else{
-//         console.log("Successfully inserted");
-//     }
-// });
+
 
 const listSchema=new mongoose.Schema({
     name:String,
@@ -110,16 +102,7 @@ app.post('/',function(req,res){
     // console.log(req.body);
     let item=req.body.task;
     let listName=req.body.list;
-    // if(req.body.list==="Work List"){
-    //     workList.push(item);
-    //     res.redirect('/work');
-    // }else{
-    //     // Tasks.push(item);
 
-      
-    //     // console.log(Tasks);
-        
-    // }
 
     const newItem=new Item({
         name:item
@@ -151,9 +134,6 @@ app.post('/delete',function(req,res){
     });
 });
 
-// app.get('/work',function(req,res){
-//     res.render('list',{ListTitle:"Work List",Ctask:workList,Year:year});
-// });
 
 app.get('/:customListName',function(req,res){
     const customListName=req.params.customListName;
