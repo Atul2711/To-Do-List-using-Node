@@ -3,6 +3,7 @@ const bodyparser=require('body-parser');
 const mongoose=require('mongoose');
 
 require('dotenv').config();
+const PORT = process.env.PORT || 3000;
 
 const app=express();
 
@@ -15,7 +16,8 @@ app.use(bodyparser.urlencoded({extended:true}));
 // let Tasks=["Buy Food","Cook Food","Eat Food"];
 // let workList=[];
 
-mongoose.connect(process.env.MONGO_URL,{useNewUrlParser:true});
+mongoose.connect("mongodb+srv://Pandit:pandit@cluster0.n7or2.mongodb.net/todoListDB",{useNewUrlParser:true});
+// mongodb+srv://Pandit:<password>@cluster0.n7or2.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
 
 //Schema 
 const itemsSchema=new mongoose.Schema({
@@ -92,16 +94,16 @@ Item.find({},function(err,founditems){
                 console.log(err);
             }else{
                 console.log("Successfully inserted");   
-        } 
-    });
-    res.redirect('/');
+            } 
+         });
+         res.redirect('/');
     }else{
         res.render('list',{ListTitle:day,Ctask:founditems,Year:year});
     }
 
-});
-    
 })
+    
+});
 
 app.post('/',function(req,res){
     
@@ -181,6 +183,7 @@ app.get('/:customListName',function(req,res){
 
 
 
-app.listen(process.env.PORT || 3000,function(){
-    console.log("Server is running on port 3000");
+app.listen(PORT,function(){
+    console.log("Server is running on port"+`${PORT}`);
 });
+
